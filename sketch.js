@@ -33,13 +33,29 @@ function draw() {
 }
 
 function keyPressed() {
+    let anyDir = false;
+    if(s.total > 0) {
+        anyDir = true;
+    }
     if(keyCode === UP_ARROW) {
+        if(s.xSpeed == 0 && s.ySpeed == 1 && anyDir) {
+            return;
+        }
         s.dir(0, -1);
     }else if(keyCode === DOWN_ARROW) {
-        s.dir(0, 1);
+        if(s.xSpeed == 0 && s.ySpeed == -1 && anyDir) {
+            return; 
+        }
+        s.dir(0, 1);  
     }else if(keyCode === RIGHT_ARROW) {
-        s.dir(1, 0);
+        if(s.xSpeed == -1 && s.ySpeed == 0 && anyDir) {
+            return; 
+        }
+        s.dir(1, 0);   
     }else if (keyCode === LEFT_ARROW) {
+        if(s.xSpeed == 1 && s.ySpeed == 0 && anyDir) {
+            return;    
+        }
         s.dir(-1, 0);
     }
 }

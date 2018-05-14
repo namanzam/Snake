@@ -14,10 +14,13 @@ function Snake() {
                 this.total = 0;
                 this.tail = [];
             }
+            text("GAME OVER", 290, 290)
         }
+        
     }
 
     this.edgeCheck = function() {
+        console.log(this.x + " " + this.y)
         if(this.x >= 580) {
             this.x = 0;
         }else if(this.x <= 0) {
