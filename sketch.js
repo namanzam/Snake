@@ -1,12 +1,12 @@
 var s;
 var scl = 20;
 var food;
-var rate = 10;
+var dead = false;
 
 function setup() {
-    createCanvas(600, 600);
+    createCanvas(800, 800);
     s = new Snake();
-    frameRate(rate);
+    frameRate(10);
     pickLocation();
 }
 
@@ -15,16 +15,16 @@ function pickLocation() {
     var rows = floor(height/scl);
     food = createVector(floor(random(cols)), floor(random(rows)));
     food.mult(scl);
-    //return f;
 }
 
 function draw() {
     background(0)
-    s.death();
+    if(s.death()) {
+        this.dead = true;
+    }
     s.edgeCheck();
     s.update();
     s.show();
-    s.frameUpdate()
     if(s.eat(food)) {
         pickLocation();
     }
@@ -34,6 +34,9 @@ function draw() {
 }
 
 function keyPressed() {
+    if(this.dead) {
+        return;
+    }
     let anyDir = false;
     if(s.total > 0) {
         anyDir = true;
@@ -58,7 +61,6 @@ function keyPressed() {
             return;    
         }
         s.dir(-1, 0);
-    }else if(keyCode === SPACE) {
-        console.log("asdf");
     }
 }
+ 

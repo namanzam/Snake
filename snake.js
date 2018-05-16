@@ -22,14 +22,14 @@ function Snake() {
     }
 
     this.edgeCheck = function() {
-        if(this.x >= 580 && this.xSpeed == 1) {
+        if(this.x >= 780 && this.xSpeed == 1) {
             this.x = 0;
         }else if(this.x <= 0 && this.xSpeed == -1) {
-            this.x = 580;
-        }else if(this.y >= 580 && this.ySpeed == 1) {
+            this.x = 780;
+        }else if(this.y >= 780 && this.ySpeed == 1) {
             this.y = 0;
         }else if(this.y <= 0 && this.ySpeed == -1) {
-            this.y = 580;
+            this.y = 780;
         }
     }
 
@@ -50,10 +50,7 @@ function Snake() {
     }
 
     this.frameUpdate = function() {
-        if(this.total % 2 == 1) {
-            this.rate = this.rate * 1.5;
-            frameRate(this.rate);
-        }
+
     }
 
     this.show = function() {
@@ -73,6 +70,10 @@ function Snake() {
         var d = dist(this.x, this.y, pos.x, pos.y);
         if (d < 1) {
             this.total++;
+            if(this.rate < 25) {
+                this.rate = this.rate * 1.1;
+                frameRate(this.rate);
+            }
             return true;
         }
         return false;
