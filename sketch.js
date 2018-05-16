@@ -1,11 +1,12 @@
 var s;
 var scl = 20;
 var food;
+var rate = 10;
 
 function setup() {
     createCanvas(600, 600);
     s = new Snake();
-    frameRate(10);
+    frameRate(rate);
     pickLocation();
 }
 
@@ -23,7 +24,7 @@ function draw() {
     s.edgeCheck();
     s.update();
     s.show();
-
+    s.frameUpdate()
     if(s.eat(food)) {
         pickLocation();
     }
@@ -57,5 +58,7 @@ function keyPressed() {
             return;    
         }
         s.dir(-1, 0);
+    }else if(keyCode === SPACE) {
+        console.log("asdf");
     }
 }

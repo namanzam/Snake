@@ -5,6 +5,7 @@ function Snake() {
     this.ySpeed = 0;
     this.total = 0; // history of itself
     this.tail = [];
+    this.rate = 10;
 
     this.death = function() {
         for(let i = 0; i < this.tail.length; i++) {
@@ -13,21 +14,21 @@ function Snake() {
             if(d < 1) {
                 this.total = 0;
                 this.tail = [];
+                text("GAME OVER", 290, 290)
+                this.xSpeed == 0;
+                this.ySpeed == 0;
             }
-            text("GAME OVER", 290, 290)
         }
-        
     }
 
     this.edgeCheck = function() {
-        console.log(this.x + " " + this.y)
-        if(this.x >= 580) {
+        if(this.x >= 580 && this.xSpeed == 1) {
             this.x = 0;
-        }else if(this.x <= 0) {
+        }else if(this.x <= 0 && this.xSpeed == -1) {
             this.x = 580;
-        }else if(this.y >= 580) {
+        }else if(this.y >= 580 && this.ySpeed == 1) {
             this.y = 0;
-        }else if(this.y <= 0) {
+        }else if(this.y <= 0 && this.ySpeed == -1) {
             this.y = 580;
         }
     }
@@ -46,6 +47,13 @@ function Snake() {
 
         this.x = constrain(this.x, 0, width - scl);
         this.y = constrain(this.y, 0, height - scl);
+    }
+
+    this.frameUpdate = function() {
+        if(this.total % 2 == 1) {
+            this.rate = this.rate * 1.5;
+            frameRate(this.rate);
+        }
     }
 
     this.show = function() {
